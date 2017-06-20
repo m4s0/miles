@@ -1,0 +1,7 @@
+---
+
+- name: restart nginx
+  service: name=nginx enabled=yes state=restarted
+
+- name: restart php-fpm
+  service: name=php-fpm enabled=yes state=restarted

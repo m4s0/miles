@@ -1,0 +1,8 @@
+ram:           4096
+cpus:          2
+boot_timeout:  0
+ipaddress:     11.11.11.11
+name:          miles-centos-box
+synced_folder: "/var/www"
+hosts:
+  - dev.miles

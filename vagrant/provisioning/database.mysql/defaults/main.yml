@@ -1,0 +1,11 @@
+---
+mysql_user: miles
+mysql_password: password
+mysql_db: miles
+mysql_root_password: root
+
+mysql_packages:
+  - Percona-Server-server-56
+  - python-pip
+  - python-devel
+  - mysql-devel

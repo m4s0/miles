@@ -1,0 +1,35 @@
+backend_server_name_virtual_host: miles-vagrant-box.dev
+#backend_application_root_dir: /var/www/www/web/new_site/web
+
+ws_vhost_path: /etc/nginx/conf.d
+ws_vhost_file: default.conf
+ws_template: default.tpl
+ws_phpfpm_template: www.conf.tpl
+ws_phpfpm_file: /etc/php-fpm.d/www.conf
+
+composer_auth_token: /home/vagrant/.composer/auth.json
+composer_auth_token_template: composer/auth.json.tpl
+
+php_packages:
+  - php
+  - php-common
+  - php-mcrypt
+  - php-mbstring
+  - php-fpm
+  - php-gd
+  - php-xml
+  - php-pdo
+  - php-intl
+  - php-xmlrpc
+  - php-mysql
+  - php-zip
+  - php-opcache
+#  - php-pecl-apcu
+  - php-cli
+  - php-curl
+  - php-devel
+  - php-pecl-memcache
+  - php-pecl-memcached
+#  - php-sqlite
+  - php-pecl-xdebug
+  - php-pecl-imagick

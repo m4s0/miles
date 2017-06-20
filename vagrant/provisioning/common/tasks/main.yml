@@ -1,0 +1,40 @@
+---
+
+- name: copy all dotfiles to vagrant home
+  copy: src={{ item }} dest=/home/vagrant/
+  with_fileglob:
+    - dot/.bash*
+    - dot/.s3cfg
+
+- name: copy ssh config
+  copy: src=ssh/config dest=/home/vagrant/.ssh/config mode=400 owner=vagrant group=vagrant
+
+- name: install common package
+  yum: name={{ item }} state=present
+  with_items:
+    - git
+    - curl
+    - vim
+    - gcc
+    - zlib
+    - zlib-devel
+    - zlib-static
+    - openssl-devel
+    - memcached
+    - ImageMagick
+    - java
+    - jpegoptim
+    - optipng
+    - s3cmd
+    - telnet
+
+- name: restart memcached
+  service: name=memcached enabled=yes state=restarted
+
+- pam_limits: domain=vagrant limit_type=hard limit_item=nofile value=262144
+- pam_limits: domain=vagrant limit_type=soft limit_item=nofile value=262144
+
+- name: Disable selinux
+  selinux:
+   state: disabled
+  register: selinux

@@ -1,0 +1,20 @@
+---
+- hosts: development
+
+  user: vagrant
+
+  vars:
+    - synced_folder: "{{ synced_folder }}"
+    - host: "{{ host }}"
+
+  vars_files:
+    - host_vars/development.yml
+
+  gather_facts: yes
+
+  roles:
+    - common
+    - webserver
+    - database.mysql
+
+  become: True

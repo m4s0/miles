@@ -1,0 +1,124 @@
+---
+
+#Nginx
+- name: Install Nginx
+  become: true
+  yum: name=nginx state=latest
+
+- name: Change default nginx site
+  become: true
+  template: src={{ ws_template }} dest={{ ws_vhost_path }}/{{ ws_vhost_file }}
+  notify: restart nginx
+
+- lineinfile: dest=/etc/nginx/nginx.conf regexp='^user www-data;$' line='user vagrant;' backrefs=yes
+
+- name: Add file /etc/hosts
+  become: true
+  template: src=hosts.tpl dest=/etc/hosts
+  notify: restart php-fpm
+
+- name: Add repository 'remi-repo'
+  command: rpm -ih http://rpms.famillecollet.com/enterprise/remi-release-7.rpm creates=/etc/yum.repos.d/remi.repo
+
+- name: install php70
+  yum: name={{ item }} enablerepo=epel,remi,remi-php70 state=installed
+  with_items: "{{ php_packages }}"
+
+- file: path=/var/log/php-fpm state=directory mode=0777 owner=vagrant group=vagrant
+
+- file: path=/var/log/php-fpm/error.log state=touch mode=0777 owner=vagrant group=vagrant
+
+- file: path=/etc/php.d/custom.ini state=touch
+
+- file: path=/var/lib/php/session state=directory mode=0770 owner=vagrant group=nginx
+
+
+#config php
+- ini_file: dest=/etc/php.d/custom.ini
+            section=Date
+            option=date.timezone
+            value=Europe/Rome
+            backup=yes
+
+- ini_file: dest=/etc/php.d/custom.ini
+            section=ErrorLog
+            option=error_log
+            value=/var/log/php/error.log
+            backup=yes
+
+- ini_file: dest=/etc/php.d/custom.ini
+            section=PHP
+            option=display_errors
+            value=On
+            backup=yes
+
+- ini_file: dest=/etc/php.d/custom.ini
+            section=PHP
+            option=memory_limit
+            value=512M
+            backup=yes
+
+- ini_file: dest=/etc/php.d/custom.ini
+            section=memcache
+            option=memcached.sess_locking
+            value=Off
+            backup=yes
+
+- ini_file: dest=/etc/php.d/custom.ini
+            section=PHP
+            option=realpath_cache_size
+            value=4096k
+            backup=yes
+
+- ini_file: dest=/etc/php.d/custom.ini
+            section=PHP
+            option=realpath_cache_ttl
+            value=7200
+            backup=yes
+
+- name: insert "Xdebug" configuration block in /etc/php.d/custom.ini
+  blockinfile:
+    dest: /etc/php.d/custom.ini
+    block: |
+      [xdebug]
+      xdebug.remote_enable=1
+      xdebug.remote_connect_back=on
+      ; vagrant default gateway | check with netstat -rn
+      xdebug.remote_host=10.0.2.2
+      xdebug.remote_port=9000
+
+- name: Change default php-fpm conf
+  become: true
+  template: src={{ ws_phpfpm_template }} dest={{ ws_phpfpm_file }}
+  notify: restart php-fpm
+
+- name: restart php-fpm
+  shell: service php-fpm restart
+  become: true
+
+- name: restart nginx
+  service: name=nginx enabled=yes state=restarted
+
+- name: Install composer
+  shell: chdir=/tmp creates=/tmp/composer.phar curl -sS https://getcomposer.org/installer | php
+
+- name: Copy composer to bin dir
+  shell: chdir=/tmp creates=/usr/bin/composer mv composer.phar /usr/bin/composer
+
+- name: Make composer executable
+  file: path=/usr/bin/composer owner=vagrant group=vagrant mode="0777"
+
+- name: config swap for composer (https://getcomposer.org/doc/articles/troubleshooting.md#proc-open-fork-failed-errors)
+  shell: /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+  ignore_errors: True
+
+- name: config swap for composer (https://getcomposer.org/doc/articles/troubleshooting.md#proc-open-fork-failed-errors)
+  shell: /sbin/mkswap /var/swap.1
+  ignore_errors: True
+
+- name: config swap for composer (https://getcomposer.org/doc/articles/troubleshooting.md#proc-open-fork-failed-errors)
+  shell: /sbin/swapon /var/swap.1
+  ignore_errors: True
+
+- name: Create .composer dir if it does not exist
+  file: path=/home/vagrant/.composer state=directory
