@@ -12,8 +12,22 @@ services:
         arguments:
           - AppBundle\Entity\Vine
 
+    app.repository.winery:
+        class: Doctrine\ORM\EntityRepository
+        factory:
+          - "@doctrine.orm.entity_manager"
+          - getRepository
+        arguments:
+          - AppBundle\Entity\Winery
+
     app.use_case.create_vine:
         class: AppBundle\Usecase\CreateVine
+        arguments:
+          - '@validator'
+          - "@doctrine.orm.entity_manager"
+
+    app.use_case.create_winery:
+        class: AppBundle\Usecase\CreateWinery
         arguments:
           - '@validator'
           - "@doctrine.orm.entity_manager"
