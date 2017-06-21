@@ -9,3 +9,9 @@ post_winery:
     defaults:
         _controller: AppBundle:Winery:createWinery
     methods: [POST]
+
+post_wine:
+    path:     '/wine'
+    defaults:
+        _controller: AppBundle:Wine:createWine
+    methods: [POST]

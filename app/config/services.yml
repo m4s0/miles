@@ -20,6 +20,28 @@ services:
         arguments:
           - AppBundle\Entity\Winery
 
+    app.repository.wine:
+        class: Doctrine\ORM\EntityRepository
+        factory:
+          - "@doctrine.orm.entity_manager"
+          - getRepository
+        arguments:
+          - AppBundle\Entity\Wine
+
+    app.validator.vine_exists_validator:
+        class: AppBundle\Validator\Constraints\VineExistsValidator
+        arguments:
+          - '@app.repository.vine'
+        tags:
+            - { name: validator.constraint_validator, alias: vine_exists_validator }
+
+    app.validator.winery_exists_validator:
+        class: AppBundle\Validator\Constraints\WineryExistsValidator
+        arguments:
+          - '@app.repository.winery'
+        tags:
+            - { name: validator.constraint_validator, alias: winery_exists_validator }
+
     app.use_case.create_vine:
         class: AppBundle\Usecase\CreateVine
         arguments:
@@ -31,3 +53,17 @@ services:
         arguments:
           - '@validator'
           - "@doctrine.orm.entity_manager"
+
+    app.use_case.create_wine:
+        class: AppBundle\Usecase\CreateWine
+        arguments:
+          - '@validator'
+          - '@app.repository.wine'
+          - '@app.repository.winery'
+          - '@app.repository.vine'
+          - "@doctrine.orm.entity_manager"
+
+    app.use_case.get_wine:
+        class: AppBundle\Usecase\GetWine
+        arguments:
+          - '@app.repository.wine'
