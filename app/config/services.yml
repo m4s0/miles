@@ -58,7 +58,6 @@ services:
         class: AppBundle\Usecase\CreateWine
         arguments:
           - '@validator'
-          - '@app.repository.wine'
           - '@app.repository.winery'
           - '@app.repository.vine'
           - "@doctrine.orm.entity_manager"

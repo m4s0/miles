@@ -5,7 +5,6 @@ namespace AppBundle\Usecase;
 use AppBundle\DTO\WineDTO;
 use AppBundle\Entity\VineRepository;
 use AppBundle\Entity\Wine;
-use AppBundle\Entity\WineRepository;
 use AppBundle\Entity\WineryRepository;
 use AppBundle\Exception\DomainException;
 use Doctrine\ORM\EntityManager;
@@ -23,10 +22,6 @@ class CreateWine
      */
     private $validator;
     /**
-     * @var WineRepository
-     */
-    private $wineRepository;
-    /**
      * @var WineryRepository
      */
     private $wineryRepository;
@@ -43,20 +38,17 @@ class CreateWine
      * CreateWine constructor.
      *
      * @param ValidatorInterface $validator
-     * @param WineRepository     $wineRepository
      * @param WineryRepository   $wineryRepository
      * @param VineRepository     $vineRepository
      * @param EntityManager      $entityManager
      */
     public function __construct(
         ValidatorInterface $validator,
-        WineRepository $wineRepository,
         WineryRepository $wineryRepository,
         VineRepository $vineRepository,
         EntityManager $entityManager
     ) {
         $this->validator        = $validator;
-        $this->wineRepository   = $wineRepository;
         $this->wineryRepository = $wineryRepository;
         $this->vineRepository   = $vineRepository;
         $this->entityManager    = $entityManager;
