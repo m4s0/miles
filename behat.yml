@@ -1,0 +1,30 @@
+default:
+    extensions:
+        Behat\Symfony2Extension:
+            kernel:
+                env: "test"
+                debug: "true"
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    symfony2: ~
+        SensioLabs\Behat\PageObjectExtension:
+            factory:
+                page_parameters:
+                  base_url: http://localhost
+#                proxies_target_dir: /path/to/tmp/
+            namespaces:
+                page: [AppBundle\Features\Context\Page]
+
+    suites:
+        api:
+            paths:
+                - "%paths.base%/features/api"
+            contexts:
+                - AppBundle\Features\Context\SetupContext
+                - AppBundle\Features\Context\ApiContext
+#            contexts:
+#                - BaseContext:
+#                    session:   '@session'
+#                    mySymfonyParam: "%custom_symfony_param%"
+#

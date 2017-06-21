@@ -1,0 +1,5 @@
+post_vine:
+    path:     '/vine'
+    defaults:
+        _controller: AppBundle:Vine:createVine
+    methods: [POST]
