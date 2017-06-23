@@ -4,15 +4,16 @@ AppBundle\DTO\WineDTO:
             - NotBlank: ~
             - Length:
                 max: 60
-                maxMessage: "Il nome deve contenere al massimo {{ limit }} caratteri."
         year:
             - NotBlank: ~
             - Regex:
                 pattern: '/^([0-9]{4})?$/'
                 match:   true
-                message: 'Anno non valido.'
         price:
-            - NotNull: ~
+            - NotBlank: ~
+            - Regex:
+                pattern: '/^\d+$/'
+                match:   true
         wineryId:
             - NotNull: ~
             - AppBundle\Validator\Constraints\WineryExists: ~

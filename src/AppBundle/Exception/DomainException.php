@@ -2,9 +2,6 @@
 
 namespace AppBundle\Exception;
 
-use Symfony\Component\Validator\ConstraintViolation;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-
 /**
  * Class DomainException
  *
@@ -13,37 +10,30 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 class DomainException extends \DomainException
 {
     /**
-     * @var ConstraintViolationListInterface
+     * @var string
      */
-    protected $errors;
+    protected $message;
 
     /**
-     * @return array
+     * @return string
      */
-    public function getErrors(): array
+    public function message(): string
     {
-        $errors = [];
-        /** @var ConstraintViolation $error */
-        foreach ($this->errors as $error) {
-            $errors[$error->getPropertyPath()] = $error->getMessage();
-        }
-
-        return [
-            'errors' => $errors
-        ];
+        return $this->message;
     }
 
     /**
-     * @param ConstraintViolationListInterface $errors
+     * @param string $message
      *
      * @return DomainException
      */
-    public static function create(ConstraintViolationListInterface $errors)
+    public static function create(string $message): DomainException
     {
         $domainException = new self();
 
-        $domainException->errors = $errors;
+        $domainException->message = $message;
 
         return $domainException;
     }
+
 }

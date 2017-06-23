@@ -4,19 +4,15 @@ AppBundle\DTO\WineryDTO:
             - NotBlank: ~
             - Length:
                 max: 60
-                maxMessage: "Il nome deve contenere al massimo {{ limit }} caratteri."
         city:
             - NotBlank: ~
             - Length:
                 max: 30
-                maxMessage: "Città deve essere di {{ limit }} cifre."
         region:
             - NotBlank: ~
             - Length:
                 max: 30
-                maxMessage: "Regione deve essere di {{ limit }} cifre."
         country:
             - NotBlank: ~
             - Length:
                 max: 40
-                maxMessage: "Paese deve essere di {{ limit }} cifre."

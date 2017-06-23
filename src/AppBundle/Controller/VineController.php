@@ -3,7 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\DTO\VineDTO;
-use AppBundle\Exception\DomainException;
+use AppBundle\Exception\ValidationException;
+use AppBundle\ViewModel\Error;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,8 +28,10 @@ class VineController extends Controller
 
         try {
             $data = $this->get('app.use_case.create_vine')->execute($vineDTO);
-        } catch (DomainException $e) {
-            return new JsonResponse($e->getErrors(), Response::HTTP_BAD_REQUEST);
+        } catch (ValidationException $e) {
+            $errorViewModel = Error::create($e->message(), $e->errors());
+
+            return new JsonResponse($errorViewModel->serialize(), Response::HTTP_BAD_REQUEST);
         }
 
         return new JsonResponse($data, Response::HTTP_CREATED);

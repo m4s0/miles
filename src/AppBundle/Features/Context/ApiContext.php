@@ -26,9 +26,9 @@ class ApiContext extends BaseContext
     {
         $this->client = $this->getSession()->getDriver()->getClient();
 
-        $hash = $table->getHash();
+        $payload = $table->getHash()[0];
 
-        $this->client->request($method, $resource, $hash[0]);
+        $this->client->request($method, $resource, $payload);
     }
 
     /**

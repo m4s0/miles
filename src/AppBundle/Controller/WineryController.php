@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\DTO\WineryDTO;
-use AppBundle\Exception\DomainException;
+use AppBundle\Exception\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,8 +27,8 @@ class WineryController extends Controller
 
         try {
             $data = $this->get('app.use_case.create_winery')->execute($wineryDTO);
-        } catch (DomainException $e) {
-            return new JsonResponse($e->getErrors(), Response::HTTP_BAD_REQUEST);
+        } catch (ValidationException $e) {
+            return new JsonResponse($e->errors(), Response::HTTP_BAD_REQUEST);
         }
 
         return new JsonResponse($data, Response::HTTP_CREATED);

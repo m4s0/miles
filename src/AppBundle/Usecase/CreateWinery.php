@@ -4,7 +4,7 @@ namespace AppBundle\Usecase;
 
 use AppBundle\DTO\WineryDTO;
 use AppBundle\Entity\Winery;
-use AppBundle\Exception\DomainException;
+use AppBundle\Exception\ValidationException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -47,7 +47,7 @@ class CreateWinery
     {
         $errors = $this->validator->validate($wineryDTO);
         if (count($errors) > 0) {
-            throw DomainException::create($errors);
+            throw ValidationException::create($errors);
         }
 
         $winery = Winery::create($wineryDTO->name, $wineryDTO->city, $wineryDTO->region, $wineryDTO->country);

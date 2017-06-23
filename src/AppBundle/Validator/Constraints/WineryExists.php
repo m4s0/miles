@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class WineryExists extends Constraint
 {
-    public $message = 'Winery id {{ id }} non esiste.';
+    public $message = 'id {{ id }} not found.';
 
     /**
      * @return string

@@ -6,7 +6,7 @@ use AppBundle\DTO\WineDTO;
 use AppBundle\Entity\VineRepository;
 use AppBundle\Entity\Wine;
 use AppBundle\Entity\WineryRepository;
-use AppBundle\Exception\DomainException;
+use AppBundle\Exception\ValidationException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -58,13 +58,13 @@ class CreateWine
      * @param WineDTO $wineDTO
      *
      * @return array
-     * @throws \AppBundle\Exception\DomainException
+     * @throws \AppBundle\Exception\ValidationException
      */
     public function execute(WineDTO $wineDTO): array
     {
         $errors = $this->validator->validate($wineDTO);
         if (count($errors) > 0) {
-            throw DomainException::create($errors);
+            throw ValidationException::create($errors);
         }
 
         $wine = Wine::create(

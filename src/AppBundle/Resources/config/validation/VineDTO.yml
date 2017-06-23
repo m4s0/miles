@@ -4,9 +4,7 @@ AppBundle\DTO\VineDTO:
             - NotBlank: ~
             - Length:
                 max: 20
-                maxMessage: "Il nome deve contenere al massimo {{ limit }} caratteri."
         grapes:
             - NotBlank: ~
             - Length:
                 max: 20
-                maxMessage: "Bacca deve contenere al massimo {{ limit }} caratteri."

@@ -55,6 +55,16 @@ class Vine
     /**
      * @param $name
      * @param $grapes
+     */
+    public function update($name, $grapes)
+    {
+        $this->name   = $name;
+        $this->grapes = $grapes;
+    }
+
+    /**
+     * @param $name
+     * @param $grapes
      *
      * @return Vine
      */

@@ -4,7 +4,7 @@ namespace AppBundle\Usecase;
 
 use AppBundle\DTO\VineDTO;
 use AppBundle\Entity\Vine;
-use AppBundle\Exception\DomainException;
+use AppBundle\Exception\ValidationException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -42,13 +42,13 @@ class CreateVine
      * @param VineDTO $vineDTO
      *
      * @return array
-     * @throws DomainException
+     * @throws ValidationException
      */
     public function execute(VineDTO $vineDTO): array
     {
         $errors = $this->validator->validate($vineDTO);
         if (count($errors) > 0) {
-            throw DomainException::create($errors);
+            throw ValidationException::create($errors);
         }
 
         $vine = Vine::create($vineDTO->name, $vineDTO->grapes);
