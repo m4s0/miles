@@ -7,26 +7,48 @@ Feature: Update Vine
     Given There is a Vine with the following attributes
       |name  |grapes|
       |Arneis|Bianca|
-
-    When I send a 'PUT' request to '/api/vine/123' with payload
-      |name  |grapes|
-      |      |      |
-
-    Then I should get a error response with code 404
-
-    When I send a 'PUT' request to '/api/vine/1' with payload
-      |name  |grapes|
-      |      |      |
-
-    Then I should get a error response with code 400
+    When I send a 'PUT' request to '/api/vines/123'
+    """
+    {
+       "name":"Nebbiolo",
+       "grapes":"Nera"
+    }
+    """
+    Then I should get a response with code 404 and message
+    """
+    {
+        "message": "Vine id 123 not found."
+    }
+    """
+    When I send a 'PUT' request to '/api/vines/1'
+    """
+    {}
+    """
+    Then I should get a response with code 400 and message
+    """
+    {
+        "message": "Validation failed.",
+        "errors": {
+            "name": "This value should not be blank.",
+            "grapes": "This value should not be blank."
+        }
+    }
+    """
 
   Scenario: Update an existing Vine successful
     Given There is a Vine with the following attributes
       |name  |grapes|
       |Arneis|Bianca|
-
-    When I send a 'PUT' request to '/api/vine/1' with payload
-      |name     |grapes|
-      |Nebbiolo |Nera  |
-
-    Then I should get a success response with code 200
+    When I send a 'PUT' request to '/api/vines/1'
+    """
+    {
+       "name":"Nebbiolo",
+       "grapes":"Nera"
+    }
+    """
+    Then I should get a response with code 200 and message
+    """
+    {
+        "id": 1
+    }
+    """

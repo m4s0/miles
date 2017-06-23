@@ -15,8 +15,10 @@ AppBundle\DTO\WineDTO:
                 pattern: '/^\d+$/'
                 match:   true
         wineryId:
+            - NotBlank: ~
             - NotNull: ~
             - AppBundle\Validator\Constraints\WineryExists: ~
         vineId:
+            - NotBlank: ~
             - NotNull: ~
             - AppBundle\Validator\Constraints\VineExists: ~

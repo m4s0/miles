@@ -2,8 +2,6 @@
 
 namespace AppBundle\Features\Context;
 
-use Behat\Gherkin\Node\TableNode;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Client;
 use PHPUnit\Framework\Assert;
 
@@ -20,34 +18,32 @@ class ApiContext extends BaseContext
     protected $client;
 
     /**
-     * @When I send a :method request to :resource with payload
+     * @When I send a :method request to :resource :content
+     * @When I send a :method request to :resource
      */
-    public function iSendARequestToWithPayload($method, $resource, TableNode $table)
+    public function iSendARequestTo($method, $resource, $content = null)
     {
         $this->client = $this->getSession()->getDriver()->getClient();
 
-        $payload = $table->getHash()[0];
-
-        $this->client->request($method, $resource, $payload);
+        $this->client->request(
+            $method,
+            $resource,
+            [],
+            [],
+            [ 'Content-Type' => 'application/json' ],
+            null !== $content ? $content->getRaw() : null
+        );
+//        $this->client->request()->headers->get('User-Agent');7
     }
 
     /**
-     * @Then I should get a success response with code :code
+     * @Then I should get a response with code :code and message
      */
-    public function iShouldGetASuccessResponseWithCode($code)
+    public function iShouldGetAResponseWithCodeAndMessage($code, $message)
     {
         $response = $this->client->getResponse();
 
         Assert::assertEquals($code, $response->getStatusCode());
-    }
-
-    /**
-     * @Then I should get a error response with code :code
-     */
-    public function iShouldGetAErrorResponseWithCode($code)
-    {
-        $response = $this->client->getResponse();
-
-        Assert::assertEquals($code, $response->getStatusCode());
+        Assert::assertEquals(json_encode(json_decode($message->getRaw(), true)), $response->getContent());
     }
 }

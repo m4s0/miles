@@ -42,6 +42,7 @@ class CreateWinery
      * @param WineryDTO $wineryDTO
      *
      * @return array
+     * @throws \AppBundle\Exception\ValidationException
      */
     public function execute(WineryDTO $wineryDTO): array
     {

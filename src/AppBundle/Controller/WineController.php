@@ -24,7 +24,7 @@ class WineController extends Controller
      */
     public function createWineAction(Request $request)
     {
-        $wineDTO = WineDTO::create($request->request->all());
+        $wineDTO = WineDTO::create(json_decode($request->getContent(), true));
 
         try {
             $data = $this->get('app.use_case.create_wine')->execute($wineDTO);

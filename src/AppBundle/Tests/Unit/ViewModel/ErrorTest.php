@@ -1,16 +1,16 @@
 <?php
-
 use AppBundle\Exception\ValidationException;
+use AppBundle\ViewModel\Error;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 
-class ValidationExceptionTest extends \PHPUnit\Framework\TestCase
+class ErrorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
-     * @covers ValidationException::errors()
+     * @covers \AppBundle\ViewModel\Error::serialize()
      */
-    public function should_get_errors()
+    public function should_get_serialize()
     {
         $violationList = new ConstraintViolationList();
 
@@ -26,11 +26,17 @@ class ValidationExceptionTest extends \PHPUnit\Framework\TestCase
         $violationList->add($violations2->reveal());
 
         $domainException = ValidationException::create($violationList);
-        $errors = $domainException->errors();
 
-        $this->assertArrayHasKey('name', $errors);
-        $this->assertEquals('This value should not be null.', $errors['name']);
-        $this->assertArrayHasKey('year', $errors);
-        $this->assertEquals('This value is not valid.', $errors['year']);
+        $error = Error::create('Validation failed.', $domainException->errors());
+
+        $errorSerialized = $error->serialize();
+        $this->assertArrayHasKey('message', $errorSerialized);
+        $this->assertEquals('Validation failed.', $errorSerialized['message']);
+
+        $this->assertArrayHasKey('errors', $errorSerialized);
+        $this->assertArrayHasKey('name', $errorSerialized['errors']);
+        $this->assertEquals('This value should not be null.', $errorSerialized['errors']['name']);
+        $this->assertArrayHasKey('year', $errorSerialized['errors']);
+        $this->assertEquals('This value is not valid.', $errorSerialized['errors']['year']);
     }
 }

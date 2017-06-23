@@ -25,7 +25,7 @@ class VineController extends Controller
      */
     public function createVineAction(Request $request)
     {
-        $vineDTO = VineDTO::create($request->request->all());
+        $vineDTO = VineDTO::create(json_decode($request->getContent(), true));
 
         try {
             $data = $this->get('app.use_case.create_vine')->execute($vineDTO);
@@ -46,7 +46,7 @@ class VineController extends Controller
      */
     public function updateVineAction(Request $request, $id)
     {
-        $vineDTO = VineDTO::create($request->request->all());
+        $vineDTO = VineDTO::create(json_decode($request->getContent(), true));
 
         try {
             $data = $this->get('app.use_case.update_vine')->execute($id, $vineDTO);
