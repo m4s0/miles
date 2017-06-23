@@ -8,11 +8,11 @@ Feature: Create Vine
       |name  |grapes|
       |      |      |
 
-    Then I should get a error response
+    Then I should get a error response with code 400
 
   Scenario: Create a new Vine successful
     Given I send a 'POST' request to '/api/vine' with payload
       |name  |grapes|
       |Arneis|Bianca|
 
-    Then I should get a success response
+    Then I should get a success response with code 201

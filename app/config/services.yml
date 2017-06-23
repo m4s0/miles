@@ -48,6 +48,13 @@ services:
           - '@validator'
           - "@doctrine.orm.entity_manager"
 
+    app.use_case.update_vine:
+        class: AppBundle\Usecase\UpdateVine
+        arguments:
+          - '@validator'
+          - '@app.repository.vine'
+          - "@doctrine.orm.entity_manager"
+
     app.use_case.create_winery:
         class: AppBundle\Usecase\CreateWinery
         arguments:
@@ -61,8 +68,3 @@ services:
           - '@app.repository.winery'
           - '@app.repository.vine'
           - "@doctrine.orm.entity_manager"
-
-    app.use_case.get_wine:
-        class: AppBundle\Usecase\GetWine
-        arguments:
-          - '@app.repository.wine'

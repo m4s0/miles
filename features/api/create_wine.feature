@@ -8,20 +8,20 @@ Feature: Create Wine
       |name        |price|year|vineId|wineryId|
       |            |     |    |      |        |
 
-    Then I should get a error response
+    Then I should get a error response with code 400
 
     When I send a 'POST' request to '/api/wine' with payload
       |name        |price|year|vineId|wineryId|
       |roero arneis|47   |2007|1     |1       |
 
-    Then I should get a error response
+    Then I should get a error response with code 400
 
   Scenario: Create a new Wine successful
-    Given There is a Vine with the following fields
+    Given There is a Vine with the following attributes
       |name  |grapes|
       |Arneis|Bianca|
 
-    And There is a Winery with the following fields
+    And There is a Winery with the following attributes
       |name   |city|region|country|
       |Pescaja|Asti|region|Italy  |
 
@@ -29,4 +29,4 @@ Feature: Create Wine
       |name        |price|year|vineId|wineryId|
       |roero arneis|47   |2007|1     |1       |
 
-    Then I should get a success response
+    Then I should get a success response with code 201

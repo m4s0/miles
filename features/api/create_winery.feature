@@ -8,11 +8,11 @@ Feature: Create Winery
       |name   |city|region|country|
       |       |    |      |       |
 
-    Then I should get a error response
+    Then I should get a error response with code 400
 
   Scenario: Create a new Winery successful
     When I send a 'POST' request to '/api/winery' with payload
       |name   |city|region  |country|
       |Pescaja|Asti|Piemonte|Italy  |
 
-    Then I should get a success response
+    Then I should get a success response with code 201

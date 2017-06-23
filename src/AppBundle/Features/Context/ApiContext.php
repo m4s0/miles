@@ -32,22 +32,22 @@ class ApiContext extends BaseContext
     }
 
     /**
-     * @Then I should get a success response
+     * @Then I should get a success response with code :code
      */
-    public function iShouldGetASuccessResponse()
+    public function iShouldGetASuccessResponseWithCode($code)
     {
         $response = $this->client->getResponse();
 
-        Assert::assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
+        Assert::assertEquals($code, $response->getStatusCode());
     }
 
     /**
-     * @Then I should get a error response
+     * @Then I should get a error response with code :code
      */
-    public function iShouldGetAErrorResponse()
+    public function iShouldGetAErrorResponseWithCode($code)
     {
         $response = $this->client->getResponse();
 
-        Assert::assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+        Assert::assertEquals($code, $response->getStatusCode());
     }
 }

@@ -1,8 +1,14 @@
-post_vine:
+create_vine:
     path:     '/vine'
     defaults:
         _controller: AppBundle:Vine:createVine
     methods: [POST]
+
+update_vine:
+    path:     '/vine/{id}'
+    defaults:
+        _controller: AppBundle:Vine:updateVine
+    methods: [PUT]
 
 post_winery:
     path:     '/winery'
