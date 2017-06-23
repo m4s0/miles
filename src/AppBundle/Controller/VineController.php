@@ -88,13 +88,7 @@ class VineController extends Controller
      */
     public function getVinesAction(Request $request)
     {
-        try {
-            $data = $this->get('app.use_case.get_vines')->execute();
-        } catch (DomainException $e) {
-            $errorViewModel = Error::create($e->message());
-
-            return new JsonResponse($errorViewModel->serialize(), Response::HTTP_NOT_FOUND);
-        }
+        $data = $this->get('app.use_case.get_vines')->execute();
 
         return new JsonResponse($data, Response::HTTP_OK);
     }

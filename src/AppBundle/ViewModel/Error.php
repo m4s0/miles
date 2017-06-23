@@ -23,9 +23,7 @@ class Error
      */
     public function serialize(): array
     {
-        $value = [
-            'message' => $this->message
-        ];
+        $value['message'] = $this->message;
 
         if (!empty($this->errors)) {
             $value['errors'] = $this->errors;

@@ -10,7 +10,7 @@ class ValidationExceptionTest extends \PHPUnit\Framework\TestCase
      * @test
      * @covers ValidationException::errors()
      */
-    public function should_get_errors()
+    public function i_should_get_errors()
     {
         $violationList = new ConstraintViolationList();
 

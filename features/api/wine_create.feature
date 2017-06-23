@@ -54,8 +54,8 @@ Feature: Create Wine
       |name  |grapes|
       |Arneis|Bianca|
     And There are Wineries with the following attributes
-      |name   |city|region|country|
-      |Pescaja|Asti|region|Italy  |
+      |name   |city|region  |country|
+      |Pescaja|Asti|Piemonte|Italy  |
     When I send a 'POST' request to '/api/wines'
     """
     {

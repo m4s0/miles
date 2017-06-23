@@ -1,8 +1,6 @@
 <?php
-use AppBundle\Exception\ValidationException;
+
 use AppBundle\ViewModel\Error;
-use Symfony\Component\Validator\ConstraintViolation;
-use Symfony\Component\Validator\ConstraintViolationList;
 
 class ErrorTest extends \PHPUnit\Framework\TestCase
 {
@@ -10,26 +8,17 @@ class ErrorTest extends \PHPUnit\Framework\TestCase
      * @test
      * @covers \AppBundle\ViewModel\Error::serialize()
      */
-    public function should_get_serialize()
+    public function i_should_get_serialized_errors_and_message()
     {
-        $violationList = new ConstraintViolationList();
+        $errors = [
+            'name' => 'This value should not be null.',
+            'year' => 'This value is not valid.'
+        ];
 
-        $violations1 = $this->prophesize(ConstraintViolation::class);
-        $violations1->getPropertyPath()->willReturn('name');
-        $violations1->getMessage()->willReturn('This value should not be null.');
-
-        $violations2 = $this->prophesize(ConstraintViolation::class);
-        $violations2->getPropertyPath()->willReturn('year');
-        $violations2->getMessage()->willReturn('This value is not valid.');
-
-        $violationList->add($violations1->reveal());
-        $violationList->add($violations2->reveal());
-
-        $domainException = ValidationException::create($violationList);
-
-        $error = Error::create('Validation failed.', $domainException->errors());
+        $error = Error::create('Validation failed.', $errors);
 
         $errorSerialized = $error->serialize();
+
         $this->assertArrayHasKey('message', $errorSerialized);
         $this->assertEquals('Validation failed.', $errorSerialized['message']);
 
@@ -38,5 +27,21 @@ class ErrorTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('This value should not be null.', $errorSerialized['errors']['name']);
         $this->assertArrayHasKey('year', $errorSerialized['errors']);
         $this->assertEquals('This value is not valid.', $errorSerialized['errors']['year']);
+    }
+
+    /**
+     * @test
+     * @covers \AppBundle\ViewModel\Error::serialize()
+     */
+    public function i_should_get_serialized_message()
+    {
+        $error = Error::create('Validation failed.');
+
+        $errorSerialized = $error->serialize();
+
+        $this->assertArrayHasKey('message', $errorSerialized);
+        $this->assertEquals('Validation failed.', $errorSerialized['message']);
+
+        $this->assertArrayNotHasKey('errors', $errorSerialized);
     }
 }
