@@ -10,6 +10,12 @@ update_vine:
         _controller: AppBundle:Vine:updateVine
     methods: [PUT]
 
+get_vine:
+    path:     '/vines/{id}'
+    defaults:
+        _controller: AppBundle:Vine:getVine
+    methods: [GET]
+
 post_winery:
     path:     '/wineries'
     defaults:

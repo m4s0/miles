@@ -55,6 +55,11 @@ services:
           - '@app.repository.vine'
           - "@doctrine.orm.entity_manager"
 
+    app.use_case.get_vine:
+        class: AppBundle\Usecase\GetVine
+        arguments:
+          - '@app.repository.vine'
+
     app.use_case.create_winery:
         class: AppBundle\Usecase\CreateWinery
         arguments:
