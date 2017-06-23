@@ -60,6 +60,11 @@ services:
         arguments:
           - '@app.repository.vine'
 
+    app.use_case.get_vines:
+        class: AppBundle\Usecase\GetVines
+        arguments:
+          - '@app.repository.vine'
+
     app.use_case.create_winery:
         class: AppBundle\Usecase\CreateWinery
         arguments:

@@ -33,7 +33,6 @@ class ApiContext extends BaseContext
             [ 'Content-Type' => 'application/json' ],
             null !== $content ? $content->getRaw() : null
         );
-//        $this->client->request()->headers->get('User-Agent');7
     }
 
     /**

@@ -16,6 +16,12 @@ get_vine:
         _controller: AppBundle:Vine:getVine
     methods: [GET]
 
+get_vines:
+    path:     '/vines'
+    defaults:
+        _controller: AppBundle:Vine:getVines
+    methods: [GET]
+
 post_winery:
     path:     '/wineries'
     defaults:

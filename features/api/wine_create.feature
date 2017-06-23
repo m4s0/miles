@@ -3,7 +3,7 @@ Feature: Create Wine
   As a http client
   I need to be able to send a request to API and create a Wine
 
-  Scenario: Create a new Wine failed
+  Scenario: Create a new Wine fails
     When I send a 'POST' request to '/api/wines'
     """
     {
@@ -50,7 +50,7 @@ Feature: Create Wine
     """
 
   Scenario: Create a new Wine successful
-    Given There is a Vine with the following attributes
+    Given There are Vines with the following attributes
       |name  |grapes|
       |Arneis|Bianca|
     And There is a Winery with the following attributes

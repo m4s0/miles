@@ -3,8 +3,8 @@ Feature: Get Vine
   As a http client
   I need to be able to send a request to API and get a Vine
 
-  Scenario: Get an existing Vine failed
-    Given There is a Vine with the following attributes
+  Scenario: Get an existing Vine fails
+    Given There are Vines with the following attributes
       |name  |grapes|
       |Arneis|Bianca|
     When I send a 'GET' request to '/api/vines/123'
@@ -16,7 +16,7 @@ Feature: Get Vine
     """
 
   Scenario: Get an existing Vine successful
-    Given There is a Vine with the following attributes
+    Given There are Vines with the following attributes
       |name  |grapes|
       |Arneis|Bianca|
     When I send a 'GET' request to '/api/vines/1'

@@ -3,8 +3,8 @@ Feature: Update Vine
   As a http client
   I need to be able to send a request to API and update a Vine
 
-  Scenario: Update an existing Vine failed
-    Given There is a Vine with the following attributes
+  Scenario: Update an existing Vine fails
+    Given There are Vines with the following attributes
       |name  |grapes|
       |Arneis|Bianca|
     When I send a 'PUT' request to '/api/vines/123'
@@ -36,7 +36,7 @@ Feature: Update Vine
     """
 
   Scenario: Update an existing Vine successful
-    Given There is a Vine with the following attributes
+    Given There are Vines with the following attributes
       |name  |grapes|
       |Arneis|Bianca|
     When I send a 'PUT' request to '/api/vines/1'

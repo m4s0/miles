@@ -3,7 +3,7 @@ Feature: Create Winery
   As a http client
   I need to be able to send a request to API and create a Winery
 
-  Scenario: Create a new Winery failed
+  Scenario: Create a new Winery fails
     When I send a 'POST' request to '/api/wineries'
     """
     {
