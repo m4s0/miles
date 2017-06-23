@@ -23,9 +23,9 @@ class SetupContext extends BaseContext
     }
 
     /**
-     * @Given There is a Winery with the following attributes
+     * @Given There are Wineries with the following attributes
      */
-    public function thereIsAWineryWithTheFollowingAttributes(TableNode $table)
+    public function thereAreWineriesWithTheFollowingAttributes(TableNode $table)
     {
         $em = $this->getService('doctrine.orm.default_entity_manager');
 

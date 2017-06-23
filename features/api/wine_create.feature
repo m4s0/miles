@@ -53,7 +53,7 @@ Feature: Create Wine
     Given There are Vines with the following attributes
       |name  |grapes|
       |Arneis|Bianca|
-    And There is a Winery with the following attributes
+    And There are Wineries with the following attributes
       |name   |city|region|country|
       |Pescaja|Asti|region|Italy  |
     When I send a 'POST' request to '/api/wines'

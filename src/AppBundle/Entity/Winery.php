@@ -87,6 +87,20 @@ class Winery
      * @param $city
      * @param $region
      * @param $country
+     */
+    public function update($name, $city, $region, $country)
+    {
+        $this->name = $name;
+        $this->city = $city;
+        $this->region = $region;
+        $this->country = $country;
+    }
+
+    /**
+     * @param $name
+     * @param $city
+     * @param $region
+     * @param $country
      *
      * @return Winery
      */

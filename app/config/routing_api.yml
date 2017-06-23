@@ -28,6 +28,12 @@ post_winery:
         _controller: AppBundle:Winery:createWinery
     methods: [POST]
 
+update_winery:
+    path:     '/wineries/{id}'
+    defaults:
+        _controller: AppBundle:Winery:updateWinery
+    methods: [PUT]
+
 post_wine:
     path:     '/wines'
     defaults:
