@@ -53,6 +53,8 @@ class UpdateWinery
      * @param WineryDTO $wineryDTO
      *
      * @return array
+     * @throws \AppBundle\Exception\ValidationException
+     * @throws \AppBundle\Exception\DomainException
      */
     public function execute(int $id, WineryDTO $wineryDTO): array
     {
