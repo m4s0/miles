@@ -81,4 +81,16 @@ class WineryController extends Controller
 
         return new JsonResponse($data, Response::HTTP_OK);
     }
+
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function getWineriesAction(Request $request)
+    {
+        $data = $this->get('app.use_case.get_wineries')->execute();
+
+        return new JsonResponse($data, Response::HTTP_OK);
+    }
 }

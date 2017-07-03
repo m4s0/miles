@@ -83,6 +83,11 @@ services:
         arguments:
           - '@app.repository.winery'
 
+    app.use_case.get_wineries:
+        class: AppBundle\Usecase\GetWineries
+        arguments:
+          - '@app.repository.winery'
+
     app.use_case.create_wine:
         class: AppBundle\Usecase\CreateWine
         arguments:

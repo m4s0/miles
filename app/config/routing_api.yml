@@ -40,6 +40,12 @@ get_winery:
         _controller: AppBundle:Winery:getWinery
     methods: [GET]
 
+get_wineries:
+    path:     '/wineries'
+    defaults:
+        _controller: AppBundle:Winery:getWineries
+    methods: [GET]
+
 post_wine:
     path:     '/wines'
     defaults:
