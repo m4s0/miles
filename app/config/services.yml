@@ -78,6 +78,11 @@ services:
           - '@app.repository.winery'
           - "@doctrine.orm.entity_manager"
 
+    app.use_case.get_winery:
+        class: AppBundle\Usecase\GetWinery
+        arguments:
+          - '@app.repository.winery'
+
     app.use_case.create_wine:
         class: AppBundle\Usecase\CreateWine
         arguments:

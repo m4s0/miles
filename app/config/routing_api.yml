@@ -34,6 +34,12 @@ update_winery:
         _controller: AppBundle:Winery:updateWinery
     methods: [PUT]
 
+get_winery:
+    path:     '/wineries/{id}'
+    defaults:
+        _controller: AppBundle:Winery:getWinery
+    methods: [GET]
+
 post_wine:
     path:     '/wines'
     defaults:

@@ -5,8 +5,8 @@ Feature: Update Winery
 
   Scenario: Update a new wineries fails
     Given There are Wineries with the following attributes
-      |name   |city|region|country|
-      |Pescaja|Asti|region|Italy  |
+      |name   |city|region  |country|
+      |Pescaja|Asti|Piemonte|Italy  |
     When I send a 'PUT' request to '/api/wineries/123'
     """
     {
@@ -41,8 +41,8 @@ Feature: Update Winery
 
   Scenario: Update a new Winery successful
     Given There are Wineries with the following attributes
-      |name   |city|region|country|
-      |Pescaja|Asti|region|Italy  |
+      |name   |city|region  |country|
+      |Pescaja|Asti|Piemonte|Italy  |
     When I send a 'PUT' request to '/api/wineries/1'
     """
     {
