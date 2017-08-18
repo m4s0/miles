@@ -1,0 +1,213 @@
+{
+	"variables": [],
+	"info": {
+		"name": "miles",
+		"_postman_id": "52d0f426-d3b8-3a42-c59d-03b8272283fc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "vine",
+			"request": {
+				"url": "dev.miles/dev.php/api/vines",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"Arneis\",\n   \"grapes\":\"Bianca\"\n}"
+				},
+				"description": "create Vine"
+			},
+			"response": []
+		},
+		{
+			"name": "vine",
+			"request": {
+				"url": "dev.miles/dev.php/api/vines/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Arneis\",\n\t\"grapes\":\"Bianca\"\n}\n"
+				},
+				"description": "update Vine"
+			},
+			"response": []
+		},
+		{
+			"name": "vine",
+			"request": {
+				"url": "dev.miles/dev.php/api/vines/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Pecorino",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "year",
+							"value": "2007",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "23",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "wineryId",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "vineId",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "retrieve Wine"
+			},
+			"response": []
+		},
+		{
+			"name": "vines",
+			"request": {
+				"url": "dev.miles/dev.php/api/vines",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Pecorino",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "year",
+							"value": "2007",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "23",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "wineryId",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "vineId",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "retrieve Vines"
+			},
+			"response": []
+		},
+		{
+			"name": "winery",
+			"request": {
+				"url": "dev.miles/dev.php/api/wineries",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"Pescaja\",\n   \"city\":\"Asti\",\n   \"region\":\"Piemonte\",\n   \"country\":\"Italy\"\n}"
+				},
+				"description": "create Winery"
+			},
+			"response": []
+		},
+		{
+			"name": "winery",
+			"request": {
+				"url": "dev.miles/dev.php/api/wineries/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"Giacomo Vico\",\n   \"city\":\"Cuneo\",\n   \"region\":\"Piemonte\",\n   \"country\":\"Italy\"\n}"
+				},
+				"description": "update Winery"
+			},
+			"response": []
+		},
+		{
+			"name": "wine",
+			"request": {
+				"url": "dev.miles/dev.php/api/wines",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"roero arneis\",\n   \"price\":\"47\",\n   \"year\":\"2007\",\n   \"vineId\":1,\n   \"wineryId\":1\n}"
+				},
+				"description": "create Wine"
+			},
+			"response": []
+		}
+	]
+}
